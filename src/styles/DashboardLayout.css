@@ -1,0 +1,9 @@
+.content{
+    transition:0.3s;
+    padding:20px;
+    margin-top:50px;
+}
+
+.content.shift{
+    margin-left:220px;
+}

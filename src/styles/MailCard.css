@@ -1,0 +1,54 @@
+/* ஒரு வரிக்கு மேல் இருந்தால் சுருக்கி ... என்று காட்டும் ஸ்டைல் */
+.mail-body-truncated {
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1; /* உங்களுக்கு 2 அல்லது 3 வரிகள் காட்ட வேண்டுமெனில் இந்த எண்ணை மாற்றலாம் */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+/* முழுமையாகக் காட்டும்போது எந்தக் கட்டுப்பாடும் இருக்காது */
+.mail-body-full {
+    display: block;
+    white-space: pre-wrap; /* மெயிலில் உள்ள லைன் பிரேக்குகள் (Enter) அப்படியே தெரிய உதவும் */
+}
+
+/* கார்டின் மேல் மவுஸ் வைக்கும்போது லேசான எஃபெக்ட் தர */
+.mail-card:hover {
+    background-color: #f9f9f9;
+}
+
+
+.headline
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.mail-card-unread
+{
+    border-top: 1px solid black;
+    font-weight: bolder;
+    color: black;
+}
+
+.mail-card-read
+{
+    border-top: 1px solid black;
+    font-weight: lighter;
+    color: gray;
+}
+
+.datetime
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 200px;
+}

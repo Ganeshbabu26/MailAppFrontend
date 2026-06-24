@@ -1,0 +1,76 @@
+/* Hamburger icon */
+.menu-btn-fixed{
+    position:fixed;
+    top:10px;
+    left:10px;
+    z-index:1000;
+    font-size:28px;
+    border:none;
+    background-color: white;
+    display: block;;
+    cursor:pointer;
+}
+
+/* Sidebar */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:220px;
+    height:100vh;
+
+    background:white;
+
+    transition:0.3s;
+    overflow:hidden;
+    z-index:999;
+
+    padding-top:60px;
+
+    border-right: 1px solid black;
+}
+
+/* Completely hidden */
+.sidebar.closed{
+    width:0;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+    margin: 0;
+}
+
+.sidebar li {
+    display: flex;
+    flex-direction: row;  /* லோகோ மற்றும் டெக்ஸ்டை பக்கவாட்டில் ஒரே வரியில் வைக்கும் */
+    align-items: center;  /* செங்குத்தாக நடுவில் வைக்கும் */
+    gap: 15px;            /* லோகோவிற்கும் டெக்ஸ்டிற்கும் இடையே உள்ள இடைவெளி */
+    padding: 12px 20px;
+    white-space: nowrap;  /* டெக்ஸ்ட் அடுத்த வரிக்கு உடைந்து போவதைத் தடுக்கும் */
+}
+.sidebar li:hover{
+    background:#b3b6c0;
+}
+
+.sidebar a{
+    color:black;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.sidebar .logo {
+    width: 24px;          /* லோகோவின் அளவு */
+    height: 24px;
+    flex-shrink: 0;       /* சைட்பார் சுருங்கினாலும் லோகோ சுருங்காமல் தடுக்கும் */
+    object-fit: contain;
+}
+
+.sidebar li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+}

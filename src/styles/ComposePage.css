@@ -1,0 +1,38 @@
+.compose-container
+{
+    margin-top: 100px;
+    max-width: 800px;
+}
+
+.compose-container h2
+{
+    margin-left: 16px;
+}
+
+.compose-container form
+{
+    display:flex;
+    flex-direction: column;
+    
+}
+
+.compose-container input,
+.compose-container textarea
+{
+    padding:25px;
+    font-size:18px;
+    border:none;
+    outline: none;
+    border-top: 1px solid black;
+}
+
+.compose-container button
+{
+    min-width:150px;
+    padding:15px;
+    background:#1a73e8;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}

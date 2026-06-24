@@ -1,0 +1,33 @@
+
+.frontcontainer
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  height: 500px;
+  width: 100%;
+  flex-direction: column;
+}
+
+.frontButtons
+{
+  padding: 10px;
+  margin: 10px;
+  height: 80px;
+  width: 200px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.frontButtons:hover
+{
+  width: 210px;
+  height: 90px;
+}
+
+.frontButtons:active
+{
+  width: 190px;
+  height: 70px;
+}

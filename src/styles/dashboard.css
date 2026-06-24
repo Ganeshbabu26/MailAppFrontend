@@ -1,0 +1,33 @@
+.navbar{
+    height:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    background:white;
+}
+
+.dashboard{
+    display:flex;
+}
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:#f0f0f0;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.content{
+    flex:1;
+    padding:20px;
+}
+
+.mail-card{
+    background:white;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+}

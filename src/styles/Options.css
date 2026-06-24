@@ -1,0 +1,48 @@
+.menu-container{
+    position:relative;
+}
+
+.three-dot{
+    cursor:pointer;
+    font-size:24px;
+}
+
+.menu{
+
+    position:absolute;
+
+    top:40px;
+    right:0;
+
+    width:180px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+
+    overflow:hidden;
+
+    z-index:1000;
+
+}
+
+.menu-item{
+
+    padding:15px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.menu-item:hover{
+
+    background:#f4f4f4;
+}
+
+.logout{
+
+    color:red;
+}

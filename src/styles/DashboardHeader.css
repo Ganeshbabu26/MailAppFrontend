@@ -1,0 +1,47 @@
+.dashboard-header
+{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    height:60px;
+
+    display:flex;
+    align-items:center;
+
+    background:white;
+    border-bottom:1px solid #ddd;
+
+    z-index:1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    right: 2%;
+
+}
+
+.menu-btn-fixed
+{
+    margin-left:10px;
+
+    background:none;
+    border:none;
+
+    font-size:30px;
+
+    cursor:pointer;
+}
+
+.dashboard-header h2
+{
+    margin-left:80px;
+}
+
+.content
+{
+    padding-top:70px;
+    padding-left:15px;
+    padding-right:15px;
+}
