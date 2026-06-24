@@ -58,7 +58,7 @@ function ComposePage()
                 <input
                     type="email"
                     placeholder="From"
-                    value={sender}
+                    value={sender} you
                     readOnly 
                     className="readonly-input" 
                 />
