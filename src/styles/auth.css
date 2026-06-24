@@ -136,3 +136,17 @@
   background-color: #f1f3f4;
   transform: scale(0.92);
 }
+
+.leftarrow-icon
+{
+  position: absolute; /* Changed from fixed to stay relative to the view port context */
+  left: 16px;
+  top: 16px;
+  padding: 8px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0; /* Subtle border instead of thick black for a cleaner Google look */
+  background-color: #ffffff;
+  z-index: 1000;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}

@@ -30,18 +30,10 @@
     margin-top: 20px;
 }
 
-.mail-card-unread
-{
-    border-top: 1px solid black;
-    font-weight: bolder;
-    color: black;
-}
 
-.mail-card-read
+.mail-card
 {
     border-top: 1px solid black;
-    font-weight: lighter;
-    color: gray;
 }
 
 .datetime
