@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../services/authService";
+import { registerUser } from "../services/AuthService";
 import "../styles/auth.css"; 
 
 // Imported the clean back arrow icon component
