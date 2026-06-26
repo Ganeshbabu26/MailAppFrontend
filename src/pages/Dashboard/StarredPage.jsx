@@ -11,9 +11,7 @@ export default function SentPage()
 
     useEffect(() =>
     {
-        const email = localStorage.getItem("email");
-
-        getStarred(email)
+        getStarred()
             .then(response =>
             {
                 setMails(response.data);

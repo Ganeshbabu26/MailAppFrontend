@@ -17,7 +17,7 @@
     top:0;
     left:0;
 
-    width:220px;
+    width:100%;
     height:100vh;
 
     background:white;
@@ -40,6 +40,7 @@
     list-style:none;
     padding:0;
     margin: 0;
+    
 }
 
 .sidebar li {
@@ -49,6 +50,7 @@
     gap: 15px;            /* லோகோவிற்கும் டெக்ஸ்டிற்கும் இடையே உள்ள இடைவெளி */
     padding: 12px 20px;
     white-space: nowrap;  /* டெக்ஸ்ட் அடுத்த வரிக்கு உடைந்து போவதைத் தடுக்கும் */
+    height: 50px;
 }
 .sidebar li:hover{
     background:#b3b6c0;
@@ -57,12 +59,12 @@
 .sidebar a{
     color:black;
     text-decoration:none;
-    font-size:18px;
+
 }
 
 .sidebar .logo {
-    width: 24px;          /* லோகோவின் அளவு */
-    height: 24px;
+    width: 30px;          /* லோகோவின் அளவு */
+    height: 30px;
     flex-shrink: 0;       /* சைட்பார் சுருங்கினாலும் லோகோ சுருங்காமல் தடுக்கும் */
     object-fit: contain;
 }
@@ -73,4 +75,5 @@
     font-size: 16px;
     display: block;
     width: 100%;
+    font-size:20px;
 }

@@ -7,3 +7,4 @@ export const registerUser = (user) => {
 export const loginUser = (user) => {
     return api.post("/auth/login", user);
 };
+

@@ -28,13 +28,12 @@
 
 }
 
-.menu-item{
-
-    padding:15px;
-
-    cursor:pointer;
-
-    transition:.2s;
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    padding: 8px 12px;
+    cursor: pointer;
 }
 
 .menu-item:hover{

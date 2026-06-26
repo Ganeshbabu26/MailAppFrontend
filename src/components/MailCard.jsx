@@ -1,35 +1,46 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/MailCard.css";
 
-export default function MailCard({ mail }) {
+export default function MailCard({ mail })
+{
+    const navigate = useNavigate();
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    const dateObj = new Date(mail.sentTime);
 
-    const isoString = mail.sentTime;
-    const dateObj = new Date(isoString);
-
-    // Formats both date and time nicely
-    const formattedDateTime = new Intl.DateTimeFormat('en-US', {
-        dateStyle: 'medium',
-        timeStyle: 'short'
-    }).format(dateObj);
-
-    const toggleExpand = () => {
-        setIsExpanded(!isExpanded);
-    };
+    const formattedDateTime =
+        new Intl.DateTimeFormat(
+            "en-US",
+            {
+                dateStyle: "medium",
+                timeStyle: "short"
+            }
+        ).format(dateObj);
 
     return (
-        <div className="mail-card" onClick={toggleExpand} style={{ cursor: "pointer" }}>
+        <div
+            className="mail-card"
+            onClick={() =>
+                navigate(`/mail/${mail.id}`)
+            }
+            style={{cursor:"pointer"}}
+        >
             <div className="headline">
                 <h3>{mail.subject}</h3>
+
                 <div className="datetime">
                     <p>{formattedDateTime}</p>
                 </div>
             </div>
-            <p>From : {mail.sender}</p>
-            <p>To : {mail.receiver}</p>
-            
-            <p className={isExpanded ? "mail-body-full" : "mail-body-truncated"}>
+
+            <p>
+                From : {mail.sender}
+            </p>
+
+            <p>
+                To : {mail.receiver}
+            </p>
+
+            <p className="mail-body-truncated">
                 {mail.body}
             </p>
         </div>

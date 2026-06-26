@@ -1,5 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { 
+    BsThreeDotsVertical, 
+    BsPerson,       // Profile ஐகான்
+    BsGear,         // Settings ஐகான்
+    BsMoon,         // Dark Mode ஐகான்
+    BsBoxArrowRight // Logout ஐகான்
+} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "../styles/Options.css";
 
@@ -33,9 +39,11 @@ export default function OptionsMenu() {
 
     }, []);
 
-    function handleLogout() {
+    function handleLogout() 
+    {
 
         localStorage.removeItem("email");
+        localStorage.removeItem("token");
 
         navigate("/");
     }
@@ -51,23 +59,26 @@ export default function OptionsMenu() {
             {open && (
                 <div className="menu">
 
-                    <div className="menu-item">
-                        👤 Profile
+                    <div
+                        className="menu-item"
+                        onClick={() => navigate("/profile")}
+                    >
+                        <BsPerson className="menu-icon" /> Profile
                     </div>
 
                     <div className="menu-item">
-                        ⚙️ Settings
+                        <BsGear className="menu-icon" /> Settings
                     </div>
 
                     <div className="menu-item">
-                        🌙 Dark Mode
+                        <BsMoon className="menu-icon" /> Dark Mode
                     </div>
 
                     <div
                         className="menu-item logout"
                         onClick={handleLogout}
                     >
-                        🚪 Logout
+                        <BsBoxArrowRight className="menu-icon" /> Logout
                     </div>
 
                 </div>

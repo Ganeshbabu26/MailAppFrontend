@@ -11,27 +11,41 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents the browser from reloading the page
-    
-    try {
-      // 1. Send the login request to the backend
-      const response = await loginUser({ email, password });
-      
-      // 2. Save the user's email or auth token to localStorage
-      localStorage.setItem("email", email);
-      
-      // 3. Optional success alert
-      alert("Login successful!");
-      
-      // 4. Redirect the user to their mobile app dashboard/inbox
-      navigate("/dashboard/inbox");
-      
-    } catch (error) {
-      console.error(error);
-      alert(error.response?.data || "Login failed. Please check your credentials.");
+const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    try 
+    {
+
+        const response = await loginUser({
+            email,
+            password
+        });
+
+       if(response.data.success)
+        {
+            localStorage.setItem(
+            "email",
+            response.data.email
+        );
+
+        localStorage.setItem(
+        "token",
+            response.data.token
+        );
+
+        navigate("/dashboard/inbox");
+        }
     }
-  };
+    catch(error)
+    {
+        alert(
+            error.response?.data?.message ||
+            "Invalid email or password"
+        );
+    }
+};
 
   return (
     <div className="auth-wrapper">

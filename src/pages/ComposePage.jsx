@@ -22,12 +22,11 @@ function ComposePage()
 
         try
         {
-            await sendMail({
-                sender,
-                receiver,
-                subject,
-                body
-            });
+        await sendMail({
+        receiver,
+        subject,
+        body
+    });
 
             alert("Mail sent successfully");
 
@@ -44,7 +43,7 @@ function ComposePage()
 
     return (
         <div className="compose-container">
-            {/* Swapped the <img> for the React Icon component */}
+
             <IoArrowBack 
                 onClick={() => navigate(-1)}
                 className="leftarrow-icon" 
@@ -54,11 +53,10 @@ function ComposePage()
 
             <form onSubmit={handleSubmit}>
 
-                {/* readOnly சேர்க்கப்பட்டுள்ளது, இதனால் பயனர் இதை மாற்ற முடியாது */}
                 <input
                     type="email"
                     placeholder="From"
-                    value={sender} you
+                    value={sender}
                     readOnly 
                     className="readonly-input" 
                 />

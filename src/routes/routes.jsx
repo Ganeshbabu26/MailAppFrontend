@@ -14,6 +14,10 @@ import Sidebar from "../components/Sidebar";
 import Options from "../pages/Options";
 import Navbar from "../components/Navbar";
 import OptionsMenu from "../pages/Options";
+import PrivateRoute from "../components/PrivateRoute";
+import MailPage from "../components/MailPage";
+import DraftPage from "../pages/Dashboard/DraftPage";
+import ProfilePage from "../pages/ProfilePage";
 
 export default function AppRoutes()
 {
@@ -44,15 +48,25 @@ export default function AppRoutes()
 
         <Route path="/navbar" element={<Navbar/>}/>
 
+        <Route path="/mail/:id" element={<MailPage/>}/>
+
+        <Route path="/profile" element={<ProfilePage/>}/>
+
         <Route
             path="/dashboard"
-            element={<DashboardLayout/>}
+            element={        
+            <PrivateRoute>
+                <DashboardLayout/>
+            </PrivateRoute>
+            }
         >
             <Route path="inbox" element={<InboxPage/>}/>
             <Route path="sent" element={<SentPage/>}/>
             <Route path="trash" element={<TrashPage/>}/>
             <Route path="starred" element={<StarredPage/>}/>
-           
+            <Route path="draft" element={<DraftPage />} />
+            
+
         </Route>
 
     </Routes>

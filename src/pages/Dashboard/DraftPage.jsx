@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getInbox } from "../../services/mailService";
+import { getDraft, getInbox } from "../../services/mailService";
 import MailCard from "../../components/MailCard";
 import { useNavigate } from "react-router-dom";
 import "../../styles/MailCard.css"
 
-export default function InboxPage()
+export default function DraftPage()
 {
     const [mails, setMails] = useState([]);
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function InboxPage()
     useEffect(() =>
     {
 
-        getInbox()
+        getDraft()
             .then(response =>
             {
                 setMails(response.data);
@@ -26,7 +26,7 @@ export default function InboxPage()
 
     return (
         <div className="page-container">
-            <p>All Inbox</p>
+            <p>Draft mails</p>
 
             {
                 mails.length === 0

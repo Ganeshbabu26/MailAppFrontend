@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { BsPencilSquare } from "react-icons/bs"; // அல்லது BsPlusLg ஐப் பயன்படுத்தலாம்
 import "../styles/ComposeButton.css";
 
 function ComposeButton()
@@ -10,7 +11,7 @@ function ComposeButton()
             className="compose-btn"
             onClick={() => navigate("/compose")}
         >
-            + Compose
+            <BsPencilSquare className="compose-icon" />
         </button>
     );
 }

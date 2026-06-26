@@ -1,41 +1,32 @@
 import api from "../api/api";
 
-export function getInbox(email)
+export function getInbox()
 {
-    return api.get(
-        `/mail/inbox/${email}`
-    );
+    return api.get("/mail/inbox");
 }
 
-export function getSent(email)
+export function getSent()
 {
-    return api.get(
-        `/mail/sent/${email}`
-    );
+    return api.get("/mail/sent");
 }
 
-export function getTrash(email)
+export function getTrash()
 {
-    return api.get(
-        `/mail/trash/${email}`
-    );
+    return api.get("/mail/trash");
 }
 
-export function getStarred(email)
+export function getStarred()
 {
-    return api.get(
-        `/mail/starred/${email}`
-    );
+    return api.get("/mail/starred");
 }
 
-import axios from "axios";
+export function getDraft()
+{
+    return api.get("/mail/draft");
+}
 
-const BASE_URL = "http://localhost:8080/mail";
 
 export const sendMail = (mail) =>
 {
-    return axios.post(
-        `${BASE_URL}/send`,
-        mail
-    );
+        return api.post("/mail/send", mail);
 }
