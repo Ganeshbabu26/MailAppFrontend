@@ -1,46 +1,110 @@
-/* ஒரு வரிக்கு மேல் இருந்தால் சுருக்கி ... என்று காட்டும் ஸ்டைல் */
-.mail-body-truncated {
-    display: -webkit-box;
-    line-clamp: 1;
-    -webkit-line-clamp: 1; /* உங்களுக்கு 2 அல்லது 3 வரிகள் காட்ட வேண்டுமெனில் இந்த எண்ணை மாற்றலாம் */
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-}
-
-/* முழுமையாகக் காட்டும்போது எந்தக் கட்டுப்பாடும் இருக்காது */
-.mail-body-full {
-    display: block;
-    white-space: pre-wrap; /* மெயிலில் உள்ள லைன் பிரேக்குகள் (Enter) அப்படியே தெரிய உதவும் */
-}
-
-/* கார்டின் மேல் மவுஸ் வைக்கும்போது லேசான எஃபெக்ட் தர */
-.mail-card:hover {
-    background-color: #f9f9f9;
-}
-
-
-.headline
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 20px;
-    margin-top: 20px;
-}
-
-
 .mail-card
 {
-    border-top: 1px solid black;
+    display: flex;
+    gap: 15px;
+
+    padding: 12px;
+    margin: 12px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.06);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
 }
 
-.datetime
+
+.avatar
 {
+    min-width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    color: white;
+
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
-    width: 200px;
+    justify-content: center;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.mail-content
+{
+    flex: 1;
+    overflow: hidden;
+}
+
+.mail-top
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subject
+{
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #111827;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.date
+{
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.sender
+{
+    margin-top: 6px;
+
+    color: #4b5563;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.preview
+{
+    margin-top: 10px;
+
+    color: #6b7280;
+
+    font-size: 15px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+    line-height: 1.5;
 }

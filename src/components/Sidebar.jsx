@@ -15,7 +15,7 @@ function Sidebar({ open, setOpen }) {
                 onClick={() => setOpen(!open)}
             >
                 {open ? (
-                    <IoClose size={30} />
+                    <IoClose size={40} />
                 ) : (
                     <HiOutlineMenu size={30} />
                 )}

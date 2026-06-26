@@ -26,8 +26,6 @@ export default function DraftPage()
 
     return (
         <div className="page-container">
-            <p>Draft mails</p>
-
             {
                 mails.length === 0
                 ?

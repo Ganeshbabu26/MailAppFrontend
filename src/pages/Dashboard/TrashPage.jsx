@@ -26,8 +26,6 @@ export default function SentPage()
 
     return (
         <div className="page-container">
-            <p>Trash</p>
-
             {
                 mails.length === 0
                 ?

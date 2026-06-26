@@ -5,16 +5,23 @@ export default function MailCard({ mail })
 {
     const navigate = useNavigate();
 
-    const dateObj = new Date(mail.sentTime);
-
-    const formattedDateTime =
+    const formattedDate =
         new Intl.DateTimeFormat(
             "en-US",
             {
-                dateStyle: "medium",
-                timeStyle: "short"
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit"
             }
-        ).format(dateObj);
+        ).format(
+            new Date(mail.sentTime)
+        );
+
+    const avatar =
+        mail.sender
+            ?.charAt(0)
+            ?.toUpperCase();
 
     return (
         <div
@@ -22,27 +29,34 @@ export default function MailCard({ mail })
             onClick={() =>
                 navigate(`/mail/${mail.id}`)
             }
-            style={{cursor:"pointer"}}
         >
-            <div className="headline">
-                <h3>{mail.subject}</h3>
-
-                <div className="datetime">
-                    <p>{formattedDateTime}</p>
-                </div>
+            <div className="avatar">
+                {avatar}
             </div>
 
-            <p>
-                From : {mail.sender}
-            </p>
+            <div className="mail-content">
 
-            <p>
-                To : {mail.receiver}
-            </p>
+                <div className="mail-top">
 
-            <p className="mail-body-truncated">
-                {mail.body}
-            </p>
+                    <h3 className="subject">
+                        {mail.subject}
+                    </h3>
+
+                    <span className="date">
+                        {formattedDate}
+                    </span>
+
+                </div>
+
+                <div className="sender">
+                    {mail.sender}
+                </div>
+
+                <div className="preview">
+                    {mail.body}
+                </div>
+
+            </div>
         </div>
     );
 }

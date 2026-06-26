@@ -26,8 +26,6 @@ export default function InboxPage()
 
     return (
         <div className="page-container">
-            <p>All Inbox</p>
-
             {
                 mails.length === 0
                 ?
