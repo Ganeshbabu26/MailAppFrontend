@@ -9,8 +9,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    //baseURL: "http://localhost:8080"
-    baseURL: "https://mailappbackend-ck1y.onrender.com"
+    baseURL: "http://localhost:8080"
+    //baseURL: "https://mailappbackend-ck1y.onrender.com"
 });
 
 api.interceptors.request.use((config) => {

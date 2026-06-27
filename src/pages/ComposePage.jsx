@@ -1,96 +1,241 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sendMail } from "../services/mailService";
-import "../styles/ComposePage.css";
+import { checkUserExists } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 
-// Imported the clean back arrow icon
 import { IoArrowBack } from "react-icons/io5";
+import {
+    FaCheckCircle,
+    FaTimesCircle,
+    FaSpinner
+} from "react-icons/fa";
 
-function ComposePage()
-{
-    const [receiver, setReceiver] = useState("");
-    const [subject, setSubject] = useState("");
-    const [body, setBody] = useState("");
+import "../styles/ComposePage.css";
 
-    const navigate = useNavigate(); 
+export default function ComposePage() {
 
-    const sender = localStorage.getItem("email") || "";
+    const navigate = useNavigate();
 
-    const handleSubmit = async (e) =>
+    const sender =
+        localStorage.getItem("email") || "";
+
+    const [receiver, setReceiver] =
+        useState("");
+
+    const [subject, setSubject] =
+        useState("");
+
+    const [body, setBody] =
+        useState("");
+
+    const [sending, setSending] =
+        useState(false);
+
+    const [checking, setChecking] =
+        useState(false);
+
+    const [receiverValid,
+        setReceiverValid] =
+        useState(null);
+
+    const [showToast,
+        setShowToast] =
+        useState(false);
+
+    useEffect(() => {
+
+        if(receiver.trim()==="")
+        {
+            setReceiverValid(null);
+            return;
+        }
+
+        const timer =
+            setTimeout(async () => {
+
+                try
+                {
+                    setChecking(true);
+
+                    const response =
+                        await checkUserExists(
+                            receiver
+                        );
+
+                    setReceiverValid(
+                        response.data.exists
+                    );
+                }
+                catch(error)
+                {
+                    console.log(error);
+                    setReceiverValid(false);
+                }
+                finally
+                {
+                    setChecking(false);
+                }
+
+            },500);
+
+        return () =>
+            clearTimeout(timer);
+
+    },[receiver]);
+
+    async function handleSubmit(e)
     {
         e.preventDefault();
 
+        if(sending)
+            return;
+
+        if(receiverValid===false)
+        {
+            return;
+        }
+
         try
         {
-        await sendMail({
-        receiver,
-        subject,
-        body
-    });
+            setSending(true);
 
-            alert("Mail sent successfully");
+            await sendMail({
+                receiver,
+                subject,
+                body
+            });
 
             setReceiver("");
             setSubject("");
             setBody("");
+
+            setShowToast(true);
+
+            setTimeout(()=>{
+                setShowToast(false);
+            },3000);
         }
         catch(error)
         {
             console.log(error);
-            alert("Failed");
+        }
+        finally
+        {
+            setSending(false);
         }
     }
 
     return (
-        <div className="compose-container">
+        <>
+            {showToast &&
+                <div className="success-toast">
+                    ✓ Mail sent successfully
+                </div>
+            }
 
-            <IoArrowBack 
-                onClick={() => navigate(-1)}
-                className="leftarrow-icon" 
-                size={28}
-            />
-            <h2>Compose Mail</h2>
+            <div className="compose-container">
 
-            <form onSubmit={handleSubmit}>
-
-                <input
-                    type="email"
-                    placeholder="From"
-                    value={sender}
-                    readOnly 
-                    className="readonly-input" 
-                />
-                
-                <input
-                    type="email"
-                    placeholder="To"
-                    value={receiver}
-                    onChange={(e) => setReceiver(e.target.value)}
-                    required
+                <IoArrowBack
+                    className="leftarrow-icon"
+                    size={28}
+                    onClick={() =>
+                        navigate(-1)
+                    }
                 />
 
-                <input
-                    type="text"
-                    placeholder="Subject"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                />
+                <h2>
+                    Compose Mail
+                </h2>
 
-                <textarea
-                    rows="10"
-                    placeholder="Write your message..."
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                />
+                <form
+                    onSubmit={handleSubmit}
+                >
 
-                <button type="submit">
-                    Send
-                </button>
+                    <input
+                        type="email"
+                        value={sender}
+                        readOnly
+                        className="readonly-input"
+                    />
 
-            </form>
+                    <div className="receiver-wrapper">
 
-        </div>
+                        <input
+                            type="email"
+                            placeholder="Receiver"
+                            value={receiver}
+                            onChange={(e)=>
+                                setReceiver(
+                                    e.target.value
+                                )
+                            }
+                            required
+                        />
+
+                        {
+                            checking &&
+                            <FaSpinner
+                                className="loading"
+                            />
+                        }
+
+                        {
+                            !checking &&
+                            receiverValid===true &&
+                            <FaCheckCircle
+                                className="valid"
+                            />
+                        }
+
+                        {
+                            !checking &&
+                            receiverValid===false &&
+                            <FaTimesCircle
+                                className="invalid"
+                            />
+                        }
+
+                    </div>
+
+                    <input
+                        type="text"
+                        placeholder="Subject"
+                        value={subject}
+                        onChange={(e)=>
+                            setSubject(
+                                e.target.value
+                            )
+                        }
+                    />
+
+                    <textarea
+                        rows="10"
+                        placeholder="Write your message..."
+                        value={body}
+                        onChange={(e)=>
+                            setBody(
+                                e.target.value
+                            )
+                        }
+                    />
+
+                    <button
+                        type="submit"
+                        disabled={
+                            sending ||
+                            receiverValid===false
+                        }
+                    >
+                        {
+                            sending
+                            ? "Sending..."
+                            : "Send Mail"
+                        }
+                    </button>
+
+                </form>
+
+            </div>
+        </>
     );
 }
-
-export default ComposePage;
