@@ -1,95 +1,140 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/AuthService";
-import "../styles/auth.css"; 
-
-// Imported the clean back arrow icon component
+import { wakeUpBackend } from "../services/wakeUpService";
+import "../styles/auth.css";
 import { IoArrowBack } from "react-icons/io5";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate(); 
 
-const handleSubmit = async (e) => {
+    const [email, setEmail] =
+        useState("");
 
-    e.preventDefault();
+    const [password, setPassword] =
+        useState("");
 
-    try 
-    {
+    const navigate =
+        useNavigate();
 
-        const response = await loginUser({
-            email,
-            password
-        });
+    const handleSubmit =
+        async (e) => {
 
-       if(response.data.success)
-        {
-            localStorage.setItem(
-            "email",
-            response.data.email
-        );
+        e.preventDefault();
 
-        localStorage.setItem(
-        "token",
-            response.data.token
-        );
+        try {
 
-        navigate("/dashboard/inbox");
+            // wake Render backend
+            await wakeUpBackend();
+
+            const response =
+                await loginUser({
+                    email,
+                    password
+                });
+
+            if(response.data.success)
+            {
+                localStorage.setItem(
+                    "email",
+                    response.data.email
+                );
+
+                localStorage.setItem(
+                    "token",
+                    response.data.token
+                );
+
+                navigate(
+                    "/dashboard/inbox"
+                );
+            }
+            else
+            {
+                alert(
+                    response.data.message
+                );
+            }
         }
-    }
-    catch(error)
-    {
-        alert(
-            error.response?.data?.message ||
-            "Invalid email or password"
-        );
-    }
-};
+        catch(error)
+        {
+            console.log(error);
 
-  return (
-    <div className="auth-wrapper">
-      {/* Swapped the <img> for the React Icon component */}
-      <IoArrowBack 
-        onClick={() => navigate("/")} 
-        className="leftarrow-icon" 
-        size={28} 
-      />
-      <div className="auth-container">
-        <div className="auth-header">
-          <h1 className="auth-title">Sign in</h1>
-          <p className="auth-subtitle">to continue to your account</p>
+            alert(
+                error.response?.data?.message
+                || "Login failed"
+            );
+        }
+    };
+
+    return (
+        <div className="auth-wrapper">
+
+            <IoArrowBack
+                onClick={() =>
+                    navigate("/")
+                }
+                className="leftarrow-icon"
+                size={28}
+            />
+
+            <div className="auth-container">
+
+                <div className="auth-header">
+                    <h1 className="auth-title">
+                        Sign in
+                    </h1>
+
+                    <p className="auth-subtitle">
+                        to continue to your account
+                    </p>
+                </div>
+
+                <form
+                    onSubmit={handleSubmit}
+                    className="auth-form">
+
+                    <div className="input-group">
+                        <input
+                            type="email"
+                            className="auth-input"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e)=>
+                                setEmail(
+                                    e.target.value
+                                )
+                            }
+                            required
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <input
+                            type="password"
+                            className="auth-input"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e)=>
+                                setPassword(
+                                    e.target.value
+                                )
+                            }
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="auth-submit-btn">
+
+                        Next
+
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
-
-        {/* The onSubmit event handles everything smoothly when the button is clicked */}
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="input-group">
-            <input
-              type="email"
-              className="auth-input"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="input-group">
-            <input
-              type="password"
-              className="auth-input"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit" className="auth-submit-btn">
-            Next
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+    );
 }
